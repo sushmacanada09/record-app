@@ -1,5 +1,6 @@
 <mat-toolbar color="primary">
-  <span>Crud Application</span>
+  <img src="../../assets/om.jpeg" class="logo-img">
+  <span class="logo-text">Record Visual Application</span>
   <span class="example-spacer"></span>
   <button mat-raised-button (click)="openAddEditEmpForm()">
     ADD EMPLOYEE
@@ -76,7 +77,7 @@
           <button mat-icon-button color="primary" (click)="openEditForm(row)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="warn" >
+          <button mat-icon-button color="warn" (click)="deleteEmployee(row.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

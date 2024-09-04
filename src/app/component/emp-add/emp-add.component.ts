@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CoreService } from 'src/app/core/core.service';
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -29,15 +29,15 @@ export class EmpAddComponent implements OnInit {
     private _coreService: CoreService
   ) {
     this.empForm = this._fb.group({
-      firstName: '',
-      lastName: '',
-      email: '',
-      dob: '',
-      gender: '',
-      education: '',
-      company: '',
-      experience: '',
-      package: '',
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      dob: ['', Validators.required],
+      gender: ['', Validators.required],
+      education: ['', Validators.required],
+      company: ['', Validators.required],
+      experience: ['', [Validators.required, Validators.min(0)]],
+      package: ['', [Validators.required, Validators.min(1)]]
     });
   }
 
@@ -70,6 +70,39 @@ export class EmpAddComponent implements OnInit {
           },
         });
       }
+    }else{
+      this.empForm.markAllAsTouched();
     }
+  }
+  get firstName() {
+    return this.empForm.get('firstName');
+  }
+
+  get lastName() {
+    return this.empForm.get('lastName');
+  }
+
+  get email() {
+    return this.empForm.get('email');
+  }
+
+  get dob() {
+    return this.empForm.get('dob');
+  }
+
+  get gender() {
+    return this.empForm.get('gender');
+  }
+
+  get company() {
+    return this.empForm.get('company');
+  }
+
+  get experience() {
+    return this.empForm.get('experience');
+  }
+
+  get package() {
+    return this.empForm.get('package');
   }
 }

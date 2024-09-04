@@ -1,16 +1,19 @@
 <div mat-dialog-title>
-    <h1>Employee Form</h1>
+    <h1>Employee Details</h1>
 </div>
 <form [formGroup]="empForm" (ngSubmit)="onFormSubmit()">
     <div mat-dialog-content class="content">
         <div class="row">
             <mat-form-field appearance="outline">
                 <mat-label>First name</mat-label>
-                <input matInput type="text" placeholder="Ex. Technical" formControlName="firstName">
+                <input matInput type="text" placeholder="first Name" formControlName="firstName">
+                <mat-error *ngIf="firstName?.hasError('required')">First Name is required</mat-error>
+                <mat-error *ngIf="firstName?.hasError('minlength')">Minimum 2 characters</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Last Name</mat-label>
-                <input matInput placeholder="Ex. Babaji" formControlName="lastName">
+                <input matInput placeholder="Last Name" formControlName="lastName">
+                <mat-error *ngIf="lastName?.hasError('required')">Last Name is required</mat-error>
             </mat-form-field>
         </div>
 
@@ -18,6 +21,8 @@
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
                 <input matInput type="email" placeholder="Ex. test@gmail.com" formControlName="email">
+                <mat-error *ngIf="email?.hasError('required')">Email is required</mat-error>
+                <mat-error *ngIf="email?.hasError('email')">Invalid email address</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Date of birth</mat-label>
@@ -25,6 +30,7 @@
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="dob?.hasError('required')">Date of Birth is required</mat-error>
             </mat-form-field>
         </div>
 
@@ -35,6 +41,7 @@
                 <mat-radio-button value="female">Female</mat-radio-button>
                 <mat-radio-button value="others">Others</mat-radio-button>
             </mat-radio-group>
+            <mat-error *ngIf="gender?.hasError('required')">Gender is required</mat-error>
         </div>
 
         <div class="row">
@@ -44,6 +51,7 @@
                     <mat-option *ngFor="let val of education" [value]="val">{{val}}
                     </mat-option>
                 </mat-select>
+                
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Company</mat-label>
@@ -54,11 +62,15 @@
             <mat-form-field appearance="outline">
                 <mat-label>Experience</mat-label>
                 <input matInput placeholder="Ex. 4" type="number" formControlName="experience">
+                <mat-error *ngIf="experience?.hasError('required')">Experience is required</mat-error>
+                <mat-error *ngIf="experience?.hasError('min')">Experience cannot be less than 0</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Package</mat-label>
                 <input matInput placeholder="Ex. 12" type="number" formControlName="package">
-                <mat-hint>In rupees</mat-hint>
+                <mat-error *ngIf="package?.hasError('required')">Package is required</mat-error>
+                <mat-error *ngIf="package?.hasError('min')">Package must be at least 1 dollar</mat-error>
+                <mat-hint>In Dollar</mat-hint>
             </mat-form-field>
         </div>
     </div>
