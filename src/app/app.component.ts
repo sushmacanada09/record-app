@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CoreService } from './core/core.service';
 import { GraphComponent } from './component/graph/graph.component';
+import { Employee } from './model/employee';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit {
     'package',
     'action',
   ];
-  dataSource!: MatTableDataSource<any>;
+  dataSource!: MatTableDataSource<Employee>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -56,7 +57,7 @@ export class AppComponent implements OnInit {
 
   getEmployeeList() {
     this._empService.getEmployeeList().subscribe({
-      next: (res) => {
+      next: (res :Employee[]) => {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
@@ -84,7 +85,7 @@ export class AppComponent implements OnInit {
     });
   } 
 
-  openEditForm(data: any) {
+  openEditForm(data: Employee) {
     const dialogRef = this._dialog.open(EmpAddComponent, {
       data,
     });

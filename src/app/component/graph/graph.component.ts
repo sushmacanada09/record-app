@@ -23,7 +23,6 @@ export class GraphComponent implements OnInit {
     this._empService.getGraphData().subscribe({
       next: (res) => {
         this.graphData = res;
-        console.log("cc",this.graphData);
         if(this.graphData){
           this.plot();
         }
@@ -34,8 +33,8 @@ export class GraphComponent implements OnInit {
   plot() {
     const element = this.plotlyChart.nativeElement;
     var trace1 = {
-      x: [52698, 43117],
-      y: [53, 31],
+      x: this.graphData[0].x,
+      y: this.graphData[0].y,
       mode: 'lines',
       name: 'North America',
       text: ['United States', 'Canada'],
@@ -51,8 +50,8 @@ export class GraphComponent implements OnInit {
     };
     
     var trace2 = {
-      x: [39317, 37236, 35650, 30066, 29570, 27159, 23557, 21046, 18007],
-      y: [33, 20, 13, 19, 27, 19, 49, 44, 38],
+      x: this.graphData[1].x,
+      y: this.graphData[2].y,
       mode: 'lines+markers',
       name: 'Europe',
       text: ['Germany', 'Britain', 'France', 'Spain', 'Italy', 'Czech Rep.', 'Greece', 'Poland'],
@@ -64,8 +63,8 @@ export class GraphComponent implements OnInit {
     };
     
     var trace3 = {
-      x: [42952, 37037, 33106, 17478, 9813, 5253, 4692, 3899],
-      y: [23, 42, 54, 89, 14, 99, 93, 70],
+      x: this.graphData[2].x,
+      y: this.graphData[2].y,
       mode: 'lines',
       name: 'Asia/Pacific',
       text: ['Australia', 'Japan', 'South Korea', 'Malaysia', 'China', 'Indonesia', 'Philippines', 'India'],
@@ -77,8 +76,8 @@ export class GraphComponent implements OnInit {
     };
     
     var trace4 = {
-      x: [19097, 18601, 15595, 13546, 12026, 7434, 5419],
-      y: [43, 47, 56, 80, 86, 93, 80],
+      x: this.graphData[3].x,
+      y: this.graphData[3].y,
       mode: 'line+markers',
       name: 'Latin America',
       text: ['Chile', 'Argentina', 'Mexico', 'Venezuela', 'Venezuela', 'El Salvador', 'Bolivia'],
