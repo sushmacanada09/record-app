@@ -22,3 +22,8 @@
 .logo-text{
   margin-left: 9px;
 }
+.action-icons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

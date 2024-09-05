@@ -21,11 +21,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EmpAddComponent } from './component/emp-add/emp-add.component';
+import { GraphComponent } from './component/graph/graph.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmpAddComponent
+    EmpAddComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,7 @@ import { EmpAddComponent } from './component/emp-add/emp-add.component';
     MatPaginatorModule,
     MatSortModule,
     MatSnackBarModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent]

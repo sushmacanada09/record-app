@@ -2,9 +2,12 @@
   <img src="../../assets/om.jpeg" class="logo-img">
   <span class="logo-text">Record Visual Application</span>
   <span class="example-spacer"></span>
-  <button mat-raised-button (click)="openAddEditEmpForm()">
-    ADD EMPLOYEE
-  </button>
+    <button mat-icon-button class="example-icon favorite-icon" (click)="openGraphForm()" aria-label="graph">
+      <mat-icon>show_chart</mat-icon>
+    </button>
+    <button mat-raised-button (click)="openAddEditEmpForm()" class="example-icon" aria-label="Add Employee">
+      ADD EMPLOYEE
+    </button>
 </mat-toolbar>
 
 
@@ -68,18 +71,20 @@
 
       <ng-container matColumnDef="package">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Package </th>
-        <td mat-cell *matCellDef="let row"> {{row.package | currency:'INR'}}L</td>
+        <td mat-cell *matCellDef="let row"> {{row.package | currency:'$'}}</td>
       </ng-container>
 
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
         <td mat-cell *matCellDef="let row">
+          <div class="action-icons">
           <button mat-icon-button color="primary" (click)="openEditForm(row)">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-icon-button color="warn" (click)="deleteEmployee(row.id)">
             <mat-icon>delete</mat-icon>
           </button>
+        </div>
         </td>
       </ng-container>
 

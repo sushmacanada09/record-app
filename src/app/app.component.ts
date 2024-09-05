@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CoreService } from './core/core.service';
+import { GraphComponent } from './component/graph/graph.component';
 
 
 @Component({
@@ -88,6 +89,16 @@ export class AppComponent implements OnInit {
       data,
     });
 
+    dialogRef.afterClosed().subscribe({
+      next: (val) => {
+        if (val) {
+          this.getEmployeeList();
+        }
+      },
+    });
+  }
+  openGraphForm() {
+    const dialogRef = this._dialog.open(GraphComponent);
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
