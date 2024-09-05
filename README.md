@@ -25,3 +25,29 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+# Steps followed for this app:
+Created app using command
+ng new appName
+npm install
+npm start or ng serve
+ng g c component
+ng g s service
+
+# Graph 
+I used plotly for data visualization
+npm install --save angular-plotly.js plotly.js
+npm install @types/plotly.js
+
+# UI Design
+ng add @angular/material
+
+# Test
+I used Karma Jasmine
+ng test
+
+# Json server
+i used fake apis using random data 
+npm install json-server
+json-server --watch db.json
