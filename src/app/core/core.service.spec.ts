@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CoreService } from './core.service';
 
-fdescribe('CoreService', () => {
+describe('CoreService', () => {
   let service: CoreService;
   let snackBarSpy: jasmine.SpyObj<MatSnackBar>;
 

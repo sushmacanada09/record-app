@@ -92,10 +92,21 @@ describe('EmpAddComponent', () => {
 
   it('should initialize the form with provided data for editing', () => {
     // Provide mock data for editing
-    component.data = mockEmployee;
+    let mockEmployeedit = {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@example.com',
+      dob: '1990-01-01',
+      gender: 'Male',
+      education: 'Graduate',
+      company: 'ABC Corp',
+      experience: 5,
+      package: 50000
+    };
+    component.data = mockEmployeedit;
     component.ngOnInit(); // Manually trigger ngOnInit as this is usually called automatically
 
-    expect(component.empForm.value).toEqual(mockEmployee);
+    expect(component.empForm.value).toEqual(mockEmployeedit);
   });
 
   it('should mark all fields as touched if form is invalid on submit', () => {
@@ -104,17 +115,40 @@ describe('EmpAddComponent', () => {
   });
 
   it('should add a new employee on valid form submission', () => {
-    const mockNewEmployee = { ...mockEmployee, id: "" }; // Assuming the backend generates the ID
-    component.empForm.setValue(mockNewEmployee);
-
-    employeeServiceSpy.addEmployee.and.returnValue(of(mockNewEmployee));
-
+    const mockNewEmployee = { ...mockEmployee, id: "" }; // For new employees, ID might not be present initially
+    component.empForm.setValue({
+      firstName: mockNewEmployee.firstName,
+      lastName: mockNewEmployee.lastName,
+      email: mockNewEmployee.email,
+      dob: mockNewEmployee.dob,
+      gender: mockNewEmployee.gender,
+      education: mockNewEmployee.education,
+      company: mockNewEmployee.company,
+      experience: mockNewEmployee.experience,
+      package: mockNewEmployee.package
+    });
+  
+    employeeServiceSpy.addEmployee.and.returnValue(of(mockNewEmployee)); // Assuming the service adds the new employee without the 'id'
+  
     component.onFormSubmit();
-
-    expect(employeeServiceSpy.addEmployee).toHaveBeenCalledWith(component.empForm.value);
+  
+    expect(employeeServiceSpy.addEmployee).toHaveBeenCalledWith(jasmine.objectContaining({
+      firstName: mockNewEmployee.firstName,
+      lastName: mockNewEmployee.lastName,
+      email: mockNewEmployee.email,
+      dob: mockNewEmployee.dob,
+      gender: mockNewEmployee.gender,
+      education: mockNewEmployee.education,
+      company: mockNewEmployee.company,
+      experience: mockNewEmployee.experience,
+      package: mockNewEmployee.package,
+      // id should be omitted here since it's a new employee
+    }));
+  
     expect(coreServiceSpy.openSnackBar).toHaveBeenCalledWith('Employee added successfully');
     expect(dialogRefSpy.close).toHaveBeenCalledWith(true);
   });
+  
 
 
   it('should handle errors during form submission', () => {
